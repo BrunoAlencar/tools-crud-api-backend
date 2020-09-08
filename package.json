@@ -1,8 +1,8 @@
 {
-  "name": "api-nodejs-task-manager",
+  "name": "tools-list-api",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/BrunoAlencar/api-nodejs-task-manager.git",
+  "repository": "https://github.com/BrunoAlencar/tools-crud-api-backend",
   "author": "João Bruno Mélo de Alencar <joaobrunoalencar@gmail.com>",
   "license": "MIT",
   "scripts": {

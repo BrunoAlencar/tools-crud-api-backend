@@ -25,3 +25,4 @@ yarn dev
 ```
 npm run dev
 ```
+- You need to create your own .env file based on .env.example
