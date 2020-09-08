@@ -1,0 +1,187 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Tools API",
+    "description": "API for Managing Tools",
+    "version": "1.0.0"
+  },
+  "produces": ["application/json"],
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "tools",
+      "description": "Tool"
+    }
+  ],
+  "paths": {
+    "/tools": {
+      "post": {
+        "tags": [
+          "tools"
+        ],
+        "x-swagger-router-controller": "tool",
+        "operationId": "POST",
+        "description": "Create tool",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The tool details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tool"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Newly created tool",
+            "schema": {
+              "$ref": "#/definitions/Tool"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "tools"
+        ],
+        "x-swagger-router-controller": "tool",
+        "operationId": "GET",
+        "description": "Returns a list of tools",
+        "responses": {
+          "200": {
+            "description": "Tool list",
+            "schema": {
+              "$ref": "#/definitions/Tool"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+
+    },
+    "/tools?tag={tagName}": {
+      "get": {
+        "tags": [
+          "tools"
+        ],
+        "x-swagger-router-controller": "toolByTag",
+        "operationId": "toolByTag",
+        "description": "Fetch a tool",
+        "parameters": [
+          {
+            "name": "tagName",
+            "in": "path",
+            "description": "The tools to fetch by tag name",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tool details",
+            "schema": {
+              "$ref": "#/definitions/Tool"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/tools/{id}": {
+      "delete": {
+        "tags": [
+          "tools"
+        ],
+        "x-swagger-router-controller": "toolDelete",
+        "operationId": "toolDelete",
+        "description": "Fetch a tool",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The tool to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tool deleted"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Success": {
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Tool": {
+      "required": ["title", "link", "description"],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
